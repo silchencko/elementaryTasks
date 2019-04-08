@@ -1,0 +1,7 @@
+.taskItem:hover {
+  background-color: floralwhite;
+}
+
+.taskItem:active {
+  background-color: bisque;
+}
