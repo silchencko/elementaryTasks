@@ -1,0 +1,12 @@
+h2 {
+  text-align: center;
+}
+.result {
+  margin: 20px auto;
+}
+app-triangle {
+  margin: 20px 0;
+}
+.paramsBtn {
+  margin-bottom: 20px;
+}

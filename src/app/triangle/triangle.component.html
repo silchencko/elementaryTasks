@@ -1,0 +1,10 @@
+<p>Треугольник {{ index + 1 }}:</p>
+<div><label>Сторона a:
+  <input type="text" class="form-control" #side1 (change)="updateTriangle(index, side1.value, 1)">
+</label></div>
+<div><label>Сторона b:
+  <input type="text" class="form-control" #side2 (change)="updateTriangle(index, side2.value, 2)">
+</label></div>
+<div><label>Сторона c:
+  <input type="text" class="form-control" #side3 (change)="updateTriangle(index, side3.value, 3)">
+</label></div>

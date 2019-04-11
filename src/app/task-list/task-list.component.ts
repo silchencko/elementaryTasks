@@ -1,4 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TaskListService } from '../services/task-list.service';
 
 @Component({
   selector: 'app-task-list',
@@ -6,45 +7,16 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
+  tasks = [];
+  current = {};
 
-  taskNum = 1;
-  taskName = 'Task';
-  @Output() showTask = new EventEmitter<{num: number, name: string}>();
-
-  tasks = [{
-    num: 1,
-    name: 'Chess'
-  }, {
-    num: 2,
-    name: 'Envelopes'
-  }, {
-    num: 3,
-    name: 'Triangles'
-  }, {
-    num: 4,
-    name: 'Palindrome'
-  }, {
-    num: 5,
-    name: 'Happy tickets'
-  }, {
-    num: 6,
-    name: 'Numeric sequence'
-  }, {
-    num: 7,
-    name: 'Fibonacci'
-  }];
-  current = this.tasks[0];
-  constructor() { }
-
+  constructor(private taskList: TaskListService) {
+    this.tasks = this.taskList.elementaryTasks;
+    this.current = this.taskList.current;
+  }
   ngOnInit() {
   }
-  chooseTask(num: number) {
-    this.current = this.tasks[num - 1];
-  }
-  showCurrentTask() {
-    this.showTask.emit({
-      num: this.current.num,
-      name: this.current.name
-    });
+  chooseTask(task: {num: number, name: string}) {
+    this.taskList.setCurrent(task.num);
   }
 }

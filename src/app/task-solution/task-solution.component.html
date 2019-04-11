@@ -1,3 +1,134 @@
-<h3>
-  {{ task.name }}
-</h3>
+<h2 class="toast-header">
+  {{ current.name }}
+</h2>
+<h5>Task:</h5>
+<div [ngSwitch]="current.num">
+  <div *ngSwitchCase="1">
+    <p>Вывести шахматную доску с заданными размерами высоты и ширины, по принципу:</p>
+    <pre>
+      * * * * * *
+       * * * * * *
+      * * * * * *
+       * * * * * *
+    </pre>
+    <p>Входные параметры: длина, ширина, символ для отображения.</p>
+    <p>Выход: строка с представлением шахматной доски</p>
+  </div>
+  <div *ngSwitchCase="2">
+    <p>Есть два конверта со сторонами (a,b) и (c,d). Требуется определить, можно ли один
+      конверт вложить в другой. Программа должна обрабатывать ввод чисел с плавающей
+      точкой.</p>
+    <p>Входные параметры: объекты конверт1 и конверт2</p>
+    <p>Выход: номер конверта, если вложение возможно, 0 – если вложение невозможно.</p>
+  </div>
+  <div *ngSwitchCase="3">
+    <p>Вывести треугольники в порядке убывания их площади.</p>
+    <p>Входные параметры: массив объектов треугольник</p>
+    <p>Выход: упорядоченный массив имён треугольников</p>
+    <p><b>Примечание:</b></p>
+    <ul>
+      <li>Расчёт площади треугольника должен производится по формуле Герона.</li>
+      <li>Каждый треугольник определяется именами вершин и длинами его сторон.</li>
+      <li>Каждый треугольник определяется именами вершин и длинами его сторон.
+        <pre>       {{ '{' }}
+          vertices: ‘ABC’,
+          a: 10,
+          b: 20,
+          c: 22.36
+        {{ '}' }}
+        </pre>
+      </li>
+    </ul>
+  </div>
+  <div *ngSwitchCase="4">
+    <p>Проверить является ли число или его часть палиндромом. Например, число 1234437
+      не является палиндромом, но является палиндромом его часть 3443. Числа меньшие, чем
+      10 палиндромом не считать.</p>
+    <p>Входные параметры: число</p>
+    <p>Выход: извлечённый из числа палиндром либо 0, если извлечение не удалось.</p>
+  </div>
+  <div *ngSwitchCase="5">
+    <p>Есть 2 способа подсчёта счастливых билетов:</p>
+    <ol>
+      <li>Простой — если на билете напечатано шестизначное число, и сумма первых трёх цифр
+        равна сумме последних трёх, то этот билет считается счастливым.</li>
+      <li>Сложный — если сумма чётных цифр билета равна сумме нечётных цифр билета, то билет
+        считается счастливым.</li>
+    </ol>
+    <p>Определить программно какой вариант подсчёта счастливых билетов даст их
+      большее количество на заданном интервале.</p>
+    <p>Входные параметры: объект context с полями min и max</p>
+    <p>Выход: объект с информацией о победившем методе и количестве счастливых
+      билетов для каждого способа подсчёта.</p>
+  </div>
+  <div *ngSwitchCase="6">
+    <p>Вывести через запятую ряд длиной n, состоящий из натуральных чисел, квадрат
+      которых не меньше заданного m.</p>
+    <p>Входные параметры: длина и значение минимального квадрата</p>
+    <p>Выход: строка с рядом чисел</p>
+  </div>
+  <div *ngSwitchCase="7">
+    <p>Вывести все числа Фибоначчи, которые удовлетворяют переданному в функцию
+      ограничению: находятся в указанном диапазоне, либо имеют указанную длину.</p>
+    <p>Входные параметры: объект context с полями min и max, либо с полем length</p>
+    <p>Выход: массив чисел</p>
+  </div>
+  <div *ngSwitchDefault>Выберите задание</div>
+</div>
+<h5>Входные параметры</h5>
+<div [ngSwitch]="current.num">
+  <div *ngSwitchCase="1">
+    <div><label>Внесите длину шахматной доски:
+      <input type="text" class="form-control" #chessLength>
+    </label></div>
+    <div><label>Внесите ширину шахматной доски:
+      <input type="text" class="form-control" #chessWidth>
+    </label></div>
+    <div><label>Внесите символ шахматной доски:
+      <input type="text" class="form-control" #chessSymb>
+    </label></div>
+    <button class="btn btn-primary"
+            (click)="drawChess(chessLength.value, chessWidth.value, chessSymb.value)">Нарисовать
+    </button>
+  </div>
+  <div *ngSwitchCase="2">
+    <div class="col-lg-6 col-sm-12">
+      <div><label>Внесите длину конверта 1:
+        <input type="text" class="form-control" #envelopLength1>
+      </label></div>
+      <div><label>Внесите ширину конверта 1:
+        <input type="text" class="form-control" #envelopWidth1>
+      </label></div>
+    </div>
+    <div class="col-lg-6 col-sm-12">
+      <div><label>Внесите длину конверта 2:
+        <input type="text" class="form-control" #envelopLength2>
+      </label></div>
+      <div><label>Внесите ширину конверта 2:
+        <input type="text" class="form-control" #envelopWidth2>
+      </label></div>
+    </div>
+    <button class="btn btn-primary"
+            (click)="checkEnvelopes(envelopLength1.value, envelopWidth1.value,
+            envelopLength2.value, envelopWidth2.value)">
+      Проверить
+    </button>
+  </div>
+  <div *ngSwitchCase="3">
+    <div class="triangles row">
+      <app-triangle class="col-lg-3 col-md-4 col-sm-6 col-xs-12"
+                    *ngFor="let triangle of triangles let idx = index" [index] = idx>
+      </app-triangle>
+    </div>
+    <div class="paramsBtn"><button class="btn btn-success" (click)="addTriangle()">Добавить треугольник</button></div>
+    <button class="btn btn-primary"
+            (click)="sortTriangles()">Отсортировать
+    </button>
+  </div>
+  <div *ngSwitchCase="4"></div>
+  <div *ngSwitchCase="5"></div>
+  <div *ngSwitchCase="6"></div>
+  <div *ngSwitchCase="7"></div>
+</div>
+<div><pre class="result alert alert-secondary" >{{ result }}</pre></div>
+

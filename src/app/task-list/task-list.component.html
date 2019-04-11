@@ -1,6 +1,5 @@
-<h5 class="card-title">Choose one of the tasks:</h5>
-<hr>
+<h5 class="toast-header">Choose one of the tasks:</h5>
 <div class="list-group">
-  <app-task class="list-group-item taskItem" *ngFor="let task of tasks" [task] = task (click)="showCurrentTask()"></app-task>
+  <app-task class="list-group-item taskItem" *ngFor="let task of tasks" [task] = task (click)="chooseTask(task)"></app-task>
 </div>
 

@@ -1,11 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
     <h1 align="center" class="jumbotron">
-      Elementary tasks!
+      {{ title }}
     </h1>
   <div class="row main">
-    <app-task-list class="col-md-3 col-lg-3" ></app-task-list>
-    <app-task-solution class="col-md-9 col-lg-9" [task]></app-task-solution>
+    <app-task-list class="col-md-3 col-lg-3"></app-task-list>
+    <!--<app-task-list class="col-md-3 col-lg-3" [tasks]="tasks" (taskToShow)="updateCurrentTask($event)" ></app-task-list>-->
+    <app-task-solution class="col-md-9 col-lg-9"></app-task-solution>
   </div>
 </div>
 
