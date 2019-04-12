@@ -8,6 +8,8 @@ import { ChessTaskService } from '../services/chess-task.service';
 import { EnvelopesTaskService } from '../services/envelopes-task.service';
 import {Subscription} from 'rxjs';
 import {TrianglesService} from '../services/triangles.service';
+import {PalindromService} from '../services/palindrom.service';
+import {TicketsMethodsService} from '../services/tickets-methods.service';
 
 @Component({
   selector: 'app-task-solution',
@@ -27,7 +29,9 @@ export class TaskSolutionComponent implements OnInit {
   constructor(private taskList: TaskListService,
               private chessTask: ChessTaskService,
               private envelopsTask: EnvelopesTaskService,
-              private trianglesTask: TrianglesService) {
+              private trianglesTask: TrianglesService,
+              private palindromTask: PalindromService,
+              private ticketsTask: TicketsMethodsService) {
     this.tasks = this.taskList.elementaryTasks;
     this.triangles = this.trianglesTask.triangles;
   }
@@ -56,6 +60,7 @@ export class TaskSolutionComponent implements OnInit {
   }
   addTriangle() {
     this.trianglesTask.addTriangle({
+      name: null,
       side1: null,
       side2: null,
       side3: null
@@ -64,5 +69,12 @@ export class TaskSolutionComponent implements OnInit {
   sortTriangles() {
     const triangleList = this.trianglesTask.getTriangles();
     this.result = this.trianglesTask.sortTriangles(triangleList);
+  }
+  checkPalindrom(palindromField: string) {
+    this.result = this.palindromTask.checkPalindrom(palindromField.trim());
+  }
+  findTicketsMethod(minTicket: string, maxTicket: string) {
+    const context = {min: minTicket, max: maxTicket}
+    this.result = this.ticketsTask.findTicketsMethod(minTicket, maxTicket);
   }
 }

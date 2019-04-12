@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
 
 @Component({
@@ -8,11 +8,13 @@ import { TaskListService } from '../services/task-list.service';
 })
 export class TaskListComponent implements OnInit {
   tasks = [];
-  current = {};
+  @Input() arg1
+  @Output() onItemChanged = new EventEmitter<number>();
 
   constructor(private taskList: TaskListService) {
     this.tasks = this.taskList.elementaryTasks;
-    this.current = this.taskList.current;
+    // this.current = this.taskList.current;
+    this.onItemChanged.emit(22);
   }
   ngOnInit() {
   }

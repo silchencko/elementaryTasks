@@ -1,4 +1,4 @@
-<h5 class="toast-header">Choose one of the tasks:</h5>
+<h5 class="toast-header">Выберите задачу:</h5>
 <div class="list-group">
   <app-task class="list-group-item taskItem" *ngFor="let task of tasks" [task] = task (click)="chooseTask(task)"></app-task>
 </div>

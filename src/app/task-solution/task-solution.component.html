@@ -1,7 +1,7 @@
 <h2 class="toast-header">
   {{ current.name }}
 </h2>
-<h5>Task:</h5>
+<h5>Задача:</h5>
 <div [ngSwitch]="current.num">
   <div *ngSwitchCase="1">
     <p>Вывести шахматную доску с заданными размерами высоты и ширины, по принципу:</p>
@@ -93,18 +93,18 @@
   </div>
   <div *ngSwitchCase="2">
     <div class="col-lg-6 col-sm-12">
-      <div><label>Внесите длину конверта 1:
+      <div><label>Введите длину конверта 1:
         <input type="text" class="form-control" #envelopLength1>
       </label></div>
-      <div><label>Внесите ширину конверта 1:
+      <div><label>Введите ширину конверта 1:
         <input type="text" class="form-control" #envelopWidth1>
       </label></div>
     </div>
     <div class="col-lg-6 col-sm-12">
-      <div><label>Внесите длину конверта 2:
+      <div><label>Введите длину конверта 2:
         <input type="text" class="form-control" #envelopLength2>
       </label></div>
-      <div><label>Внесите ширину конверта 2:
+      <div><label>Введите ширину конверта 2:
         <input type="text" class="form-control" #envelopWidth2>
       </label></div>
     </div>
@@ -125,8 +125,25 @@
             (click)="sortTriangles()">Отсортировать
     </button>
   </div>
-  <div *ngSwitchCase="4"></div>
-  <div *ngSwitchCase="5"></div>
+  <div *ngSwitchCase="4">
+    <div><label>Введите число:
+      <input type="text" class="form-control" #palindromField>
+    </label></div>
+    <button class="btn btn-primary"
+            (click)="checkPalindrom(palindromField.value)">Найти палиндром
+    </button>
+  </div>
+  <div *ngSwitchCase="5">
+    <div><label>Введите минимальный билет:
+      <input type="text" class="form-control" #minTicket>
+    </label></div>
+    <div><label>Введите максимальный билет:
+      <input type="text" class="form-control" #maxTicket>
+    </label></div>
+    <button class="btn btn-primary"
+            (click)="findTicketsMethod(minTicket.value, maxTicket.value)">Найти лучший метод
+    </button>
+  </div>
   <div *ngSwitchCase="6"></div>
   <div *ngSwitchCase="7"></div>
 </div>

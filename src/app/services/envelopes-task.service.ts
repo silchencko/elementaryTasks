@@ -11,18 +11,16 @@ export class EnvelopesTaskService {
       return false;
     } else if (env1.len <= 0 || env1.wid <= 0 || env2.len <= 0 || env2.wid <= 0) {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
   canPutOneInAnother(env1: {len: number, wid: number}, env2: {len: number, wid: number}) {
     if (env1.len > env2.len && env1.wid > env2.wid) {
       return true;
     } else if (env1.len > env2.wid && env1.wid > env2.len) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
   checkEnvelopes(env1: {len: number, wid: number}, env2: {len: number, wid: number}) {
     let result = '';

@@ -7,13 +7,12 @@ export class ChessTaskService {
 
   constructor() { }
   validate(l: number, w: number, symb: string) {
-    if (isNaN(l) || l < 1 || isNaN(w) || 1 > w) {
+    if (!Number.isInteger(l) || l < 1 || !Number.isInteger(w) || 1 > w) {
       return false;
     } else if (symb === '') {
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
   drawLine(l: number, w: number, sym: string) {
     let line = '';
@@ -27,7 +26,7 @@ export class ChessTaskService {
   drawBoard(l: number, w: number, sym: string) {
     let result = '';
     if (!this.validate(l, w, sym)) {
-      result = 'Заполните все поля. Длина и ширина должны быть числовыми, не меньше 1';
+      result = 'Заполните все поля. Длина и ширина должны быть целыми числами, не меньше 1';
     } else {
       while (l > 0) {
         result = result + this.drawLine(l, w, sym);

@@ -7,25 +7,25 @@ import {Observable, Subject} from 'rxjs';
 export class TaskListService {
   elementaryTasks = [{
       num: 1,
-      name: 'Chess'
+      name: 'Шахматная доска'
     }, {
       num: 2,
-      name: 'Envelopes'
+      name: 'Конверты'
     }, {
       num: 3,
-      name: 'Triangles'
+      name: 'Треугольники'
     }, {
       num: 4,
-      name: 'Palindrome'
+      name: 'Палиндром'
     }, {
       num: 5,
-      name: 'Happy tickets'
+      name: 'Счастливые билетики'
     }, {
       num: 6,
-      name: 'Numeric sequence'
+      name: 'Числовая последовательность'
     }, {
       num: 7,
-      name: 'Fibonacci'
+      name: 'Ряд Фибоначчи'
     }];
   current = new Subject();
 

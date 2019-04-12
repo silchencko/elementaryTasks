@@ -1,4 +1,7 @@
 <p>Треугольник {{ index + 1 }}:</p>
+<div><label>Имя:
+  <input type="text" class="form-control" #name (change)="updateTriangle(index, name.value)">
+</label></div>
 <div><label>Сторона a:
   <input type="text" class="form-control" #side1 (change)="updateTriangle(index, side1.value, 1)">
 </label></div>
