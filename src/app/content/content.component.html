@@ -1,0 +1,10 @@
+<div class="container">
+  <h1 align="center" class="page-header">
+    {{ title }}
+  </h1>
+  <div class="row main">
+    <!--<app-task-list class="col-md-3 col-lg-3" [tasks]="data" ></app-task-list>-->
+    <app-task-list class="col-md-3 col-lg-3" [tasks]="data" (currentChanged)="updateCurrentTask($event)"></app-task-list>
+    <app-task-solution class="col-md-9 col-lg-9" [task]="current"></app-task-solution>
+  </div>
+</div>

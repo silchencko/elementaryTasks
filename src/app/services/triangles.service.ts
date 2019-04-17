@@ -22,7 +22,7 @@ export class TrianglesService {
     }
   }
   validateTriangleName(triangle) {
-    const regEx = /^[a-z]{3}$/;
+    const regEx = /^[a-z]{3}$/i;
     return regEx.test(triangle.name);
   }
   validateTriangle(triangle) {

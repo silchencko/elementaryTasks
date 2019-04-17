@@ -1,13 +1,4 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div class="container">
-    <h1 align="center" class="page-header">
-      {{ title }}
-    </h1>
-  <div class="row main">
-    <app-task-list class="col-md-3 col-lg-3" [arg1]=current (onItemChanged)="handleSidberItemChanged($event)"></app-task-list>
-    <!--<app-task-list class="col-md-3 col-lg-3" [tasks]="tasks" (taskToShow)="updateCurrentTask($event)" ></app-task-list>-->
-    <app-task-solution class="col-md-9 col-lg-9" [arg2]="current"></app-task-solution>
-  </div>
-</div>
+<app-content></app-content>
 
 <router-outlet></router-outlet>

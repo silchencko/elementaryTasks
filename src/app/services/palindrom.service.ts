@@ -39,16 +39,12 @@ export class PalindromService {
     }
     return palindromList;
   }
-  compare(a, b) {
-    if (a.length < b.length) { return 1; }
-    if (a.length > b.length) { return -1; }
-  }
   checkPalindrom(field: string) {
     let result = '';
     if (this.validate(field)) {
       const palindromList = this.findAllPalindroms(field);
       if (palindromList.length > 0) {
-        palindromList.sort(this.compare);
+        palindromList.sort((a, b) => b.length - a.length);
         result = palindromList[0];
       } else {
         result = '0';

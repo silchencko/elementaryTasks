@@ -7,18 +7,21 @@ import { TaskListService } from '../services/task-list.service';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-  tasks = [];
-  @Input() arg1
-  @Output() onItemChanged = new EventEmitter<number>();
+
+  @Input() tasks: [{num: number, name: string}];
+  @Output() currentChanged = new EventEmitter<{num: number, name: string}>();
 
   constructor(private taskList: TaskListService) {
-    this.tasks = this.taskList.elementaryTasks;
+    // this.tasks = this.taskList.elementaryTasks;
     // this.current = this.taskList.current;
-    this.onItemChanged.emit(22);
   }
   ngOnInit() {
   }
   chooseTask(task: {num: number, name: string}) {
-    this.taskList.setCurrent(task.num);
+    this.currentChanged.emit({
+      num: task.num,
+      name: task.name
+    });
+    // this.taskList.setCurrent(task.num);
   }
 }

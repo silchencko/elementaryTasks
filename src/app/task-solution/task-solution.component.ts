@@ -1,7 +1,7 @@
 import {
   Component,
   OnInit,
-  Input
+  Input, Output, EventEmitter, OnChanges, SimpleChanges
 } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
 import { ChessTaskService } from '../services/chess-task.service';
@@ -10,18 +10,17 @@ import {Subscription} from 'rxjs';
 import {TrianglesService} from '../services/triangles.service';
 import {PalindromService} from '../services/palindrom.service';
 import {TicketsMethodsService} from '../services/tickets-methods.service';
+import {IntegersTaskService} from '../services/integers-task.service';
 
 @Component({
   selector: 'app-task-solution',
   templateUrl: './task-solution.component.html',
   styleUrls: ['./task-solution.component.css']
 })
-export class TaskSolutionComponent implements OnInit {
-  tasks = [];
-  current = {};
+export class TaskSolutionComponent implements OnInit, OnChanges {
   result = null;
   @Input() task: {num: number, name: string};
-  subs = new Subscription();
+  // subs = new Subscription();
 
   // Triangles Task
   triangles = [];
@@ -31,17 +30,22 @@ export class TaskSolutionComponent implements OnInit {
               private envelopsTask: EnvelopesTaskService,
               private trianglesTask: TrianglesService,
               private palindromTask: PalindromService,
-              private ticketsTask: TicketsMethodsService) {
-    this.tasks = this.taskList.elementaryTasks;
+              private ticketsTask: TicketsMethodsService,
+              private integersTask: IntegersTaskService) {
+    // this.tasks = this.taskList.elementaryTasks;
     this.triangles = this.trianglesTask.triangles;
   }
 
   ngOnInit() {
-    const sub = this.taskList.getCurrent()
-      .subscribe((data: any) => {
-      this.current = data;
-    });
-    this.subs.add(sub);
+    // this.current = this.task;
+    // const sub = this.taskList.getCurrent()
+    //  .subscribe((data: any) => {
+    //  this.current = data;
+    // });
+    // this.subs.add(sub);
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.result = null;
   }
   drawChess(l: string, w: string, symb: string) {
     const len = Number(l);
@@ -74,7 +78,14 @@ export class TaskSolutionComponent implements OnInit {
     this.result = this.palindromTask.checkPalindrom(palindromField.trim());
   }
   findTicketsMethod(minTicket: string, maxTicket: string) {
-    const context = {min: minTicket, max: maxTicket}
-    this.result = this.ticketsTask.findTicketsMethod(minTicket, maxTicket);
+    const context = {min: minTicket, max: maxTicket};
+    this.result = this.ticketsTask.findTicketsMethod(context);
   }
+  drawIntegers(integersLength: string, minSquare: string) {
+    const intLength = Number(integersLength);
+    const minSqr = Number(minSquare);
+    this.result = this.integersTask.drawIntegers(intLength, minSqr);
+  }
+
+
 }

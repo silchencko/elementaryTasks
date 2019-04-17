@@ -8,6 +8,8 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { TaskSolutionComponent } from './task-solution/task-solution.component';
 import { TriangleComponent } from './triangle/triangle.component';
 import { FormsModule } from '@angular/forms';
+import { ContentComponent } from './content/content.component';
+import {CommonFunctionsService} from './services/common-functions.service';
 
 @NgModule({
   declarations: [
@@ -15,14 +17,15 @@ import { FormsModule } from '@angular/forms';
     TaskComponent,
     TaskListComponent,
     TaskSolutionComponent,
-    TriangleComponent
+    TriangleComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CommonFunctionsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

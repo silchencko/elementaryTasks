@@ -27,14 +27,14 @@ export class TaskListService {
       num: 7,
       name: 'Ряд Фибоначчи'
     }];
-  current = new Subject();
+  // current = new Subject();
 
   constructor() { }
 
-  getCurrent(): Observable<any> {
-    return this.current.asObservable();
-  }
-  setCurrent(num: number): void {
-    this.current.next(this.elementaryTasks[num - 1]);
-  }
+  // getCurrent(): Observable<any> {
+  //   return this.current.asObservable();
+  // }
+  // setCurrent(num: number): void {
+  //   this.current.next(this.elementaryTasks[num - 1]);
+  // }
 }

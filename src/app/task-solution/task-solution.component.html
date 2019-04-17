@@ -1,8 +1,8 @@
 <h2 class="toast-header">
-  {{ current.name }}
+  {{ task.name }}
 </h2>
 <h5>Задача:</h5>
-<div [ngSwitch]="current.num">
+<div [ngSwitch]="task.num">
   <div *ngSwitchCase="1">
     <p>Вывести шахматную доску с заданными размерами высоты и ширины, по принципу:</p>
     <pre>
@@ -76,7 +76,7 @@
   <div *ngSwitchDefault>Выберите задание</div>
 </div>
 <h5>Входные параметры</h5>
-<div [ngSwitch]="current.num">
+<div [ngSwitch]="task.num">
   <div *ngSwitchCase="1">
     <div><label>Внесите длину шахматной доски:
       <input type="text" class="form-control" #chessLength>
@@ -144,7 +144,17 @@
             (click)="findTicketsMethod(minTicket.value, maxTicket.value)">Найти лучший метод
     </button>
   </div>
-  <div *ngSwitchCase="6"></div>
+  <div *ngSwitchCase="6">
+    <div><label>Длина натурального ряда n:
+      <input type="text" class="form-control" #integersLength>
+    </label></div>
+    <div><label>Минимальный квадрат m:
+      <input type="text" class="form-control" #minSquare>
+    </label></div>
+    <button class="btn btn-primary"
+            (click)="drawIntegers(integersLength.value, minSquare.value)">Вывести натуральный ряд
+    </button>
+  </div>
   <div *ngSwitchCase="7"></div>
 </div>
 <div><pre class="result alert alert-secondary" >{{ result }}</pre></div>
