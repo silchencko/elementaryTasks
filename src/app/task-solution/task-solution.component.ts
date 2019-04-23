@@ -11,6 +11,8 @@ import {TrianglesService} from '../services/triangles.service';
 import {PalindromService} from '../services/palindrom.service';
 import {TicketsMethodsService} from '../services/tickets-methods.service';
 import {IntegersTaskService} from '../services/integers-task.service';
+import {CommonFunctionsService} from '../services/common-functions.service';
+import {FiboTaskService} from '../services/fibo-task.service';
 
 @Component({
   selector: 'app-task-solution',
@@ -18,20 +20,25 @@ import {IntegersTaskService} from '../services/integers-task.service';
   styleUrls: ['./task-solution.component.css']
 })
 export class TaskSolutionComponent implements OnInit, OnChanges {
-  result = null;
+  result: string;
   @Input() task: {num: number, name: string};
   // subs = new Subscription();
 
   // Triangles Task
   triangles = [];
+  // Fibonacci Task
+  isFiboRangeDisabled = false;
+  isFiboLengthDisabled = false;
 
   constructor(private taskList: TaskListService,
+              private commonFunctions: CommonFunctionsService,
               private chessTask: ChessTaskService,
               private envelopsTask: EnvelopesTaskService,
               private trianglesTask: TrianglesService,
               private palindromTask: PalindromService,
               private ticketsTask: TicketsMethodsService,
-              private integersTask: IntegersTaskService) {
+              private integersTask: IntegersTaskService,
+              private fiboTask: FiboTaskService) {
     // this.tasks = this.taskList.elementaryTasks;
     this.triangles = this.trianglesTask.triangles;
   }
@@ -87,5 +94,43 @@ export class TaskSolutionComponent implements OnInit, OnChanges {
     this.result = this.integersTask.drawIntegers(intLength, minSqr);
   }
 
+  // Fibonacci Task
+  disableFiboRange(value) {
+    if (value !== '') {
+      this.isFiboRangeDisabled = true;
+    } else {
+      this.isFiboRangeDisabled = false;
+    }
+  }
+  disableFibolength(value) {
+    if (value !== '') {
+      this.isFiboLengthDisabled = true;
+    } else {
+      this.isFiboLengthDisabled = false;
+    }
+  }
+  showFibo(min: string, max: string, listLength: string) {
+    const context = {
+      min: undefined,
+      max: undefined,
+      listLength: undefined
+    };
+    if (this.commonFunctions.validateInt(listLength)) {
+      context.listLength = Number(listLength);
+      this.result = this.fiboTask.showFibo(context).toString();
+
+    } else if (this.commonFunctions.validateInt(min) && this.commonFunctions.validateInt(max)) {
+      if (+min < +max) {
+        context.min = Number(min);
+        context.max = Number(max);
+        this.result = this.fiboTask.showFibo(context).toString();
+      } else {
+        this.result = 'Минимальное число должно быть меньше максимального';
+      }
+
+    } else {
+      this.result = 'Введите минимальное и максимальное число или длину ряда';
+    }
+  }
 
 }

@@ -155,7 +155,27 @@
             (click)="drawIntegers(integersLength.value, minSquare.value)">Вывести натуральный ряд
     </button>
   </div>
-  <div *ngSwitchCase="7"></div>
+  <div *ngSwitchCase="7">
+    <p>Укажите минимальное и максимальное число ряда Фибоначчи или длину ряда</p>
+    <div class="row">
+      <div class="col-lg-6">
+        <div><label>Начало диапазона:
+          <input type="text" class="form-control" #fibonacciMin [disabled]="isFiboRangeDisabled" (keyup)="disableFibolength(fibonacciMin.value)">
+        </label></div>
+        <div><label>Конец диапазона:
+          <input type="text" class="form-control" #fibonacciMax [disabled]="isFiboRangeDisabled" (keyup)="disableFibolength(fibonacciMax.value)">
+        </label></div>
+      </div>
+      <div class="col-lg-6">
+        <label>Длина диапазона:
+          <input type="text" class="form-control" #fibonacciLength [disabled]="isFiboLengthDisabled" (keyup)="disableFiboRange(fibonacciLength.value)">
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary"
+            (click)="showFibo(fibonacciMin.value, fibonacciMax.value, fibonacciLength.value)">Вывести ряд Фибоначчи
+    </button>
+  </div>
 </div>
 <div><pre class="result alert alert-secondary" >{{ result }}</pre></div>
 
