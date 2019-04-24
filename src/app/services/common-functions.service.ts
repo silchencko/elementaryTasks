@@ -6,8 +6,15 @@ import { Injectable } from '@angular/core';
 export class CommonFunctionsService {
 
   constructor() { }
-  validateInt(num: string) {
+  validateInputInt(num: string) {
     return !isNaN(+num) && +num % 1 === 0 && +num >= 0 && num !== '';
+  }
+  validatePositiveInputNum(num: string) {
+    return !isNaN(+num) && +num >= 0 && num !== '';
+  }
+  validateFixedSizeNum(num: string, size: number) {
+    const regex = new RegExp(`^\\d{${size}}$`);
+    return regex.test(num);
   }
   isInt(num) {
     return (num % 1 === 0);

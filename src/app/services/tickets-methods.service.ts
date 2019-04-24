@@ -56,6 +56,8 @@ export class TicketsMethodsService {
     return result;
   }
   countHappyTickets(minNum: string, maxNum: string) {
+    this.result.easyMethodNum = 0;
+    this.result.difficultMethod = 0;
     let current = +minNum;
     const max = +maxNum;
     const ticketLength = minNum.length;
@@ -70,22 +72,16 @@ export class TicketsMethodsService {
     return this.result;
   }
   findTicketsMethod(context: {min: string, max: string}) {
-    let result = '';
-    if (this.validate(context)) {
-      this.countHappyTickets(context.min, context.max);
-      if (this.result.easyMethodNum > this.result.difficultMethod) {
-        this.result.winner = 'Простой метод';
-      } else if (this.result.easyMethodNum < this.result.difficultMethod) {
-        this.result.winner = 'Сложный метод';
-      } else {
-        this.result.winner = 'Ничья';
-      }
-      result = `Победитель: ${this.result.winner};
-      количество счастливых билетов по простому методу: ${this.result.easyMethodNum};
-      количество счастливых билетов по сложноому методу: ${this.result.difficultMethod}`;
+    this.countHappyTickets(context.min, context.max);
+    if (this.result.easyMethodNum > this.result.difficultMethod) {
+      this.result.winner = 'Простой метод';
+    } else if (this.result.easyMethodNum < this.result.difficultMethod) {
+      this.result.winner = 'Сложный метод';
     } else {
-      result = 'Заполните все поля оложительными шестизначными числами';
+      this.result.winner = 'Ничья';
     }
-    return result;
+    return `Победитель: ${this.result.winner};
+    количество счастливых билетов по простому методу: ${this.result.easyMethodNum};
+    количество счастливых билетов по сложноому методу: ${this.result.difficultMethod}`;
   }
 }

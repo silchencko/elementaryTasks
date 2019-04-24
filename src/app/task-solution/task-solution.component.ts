@@ -85,29 +85,27 @@ export class TaskSolutionComponent implements OnInit, OnChanges {
     this.result = this.palindromTask.checkPalindrom(palindromField.trim());
   }
   findTicketsMethod(minTicket: string, maxTicket: string) {
-    const context = {min: minTicket, max: maxTicket};
-    this.result = this.ticketsTask.findTicketsMethod(context);
+    if (this.commonFunctions.validateFixedSizeNum(minTicket, 6) && this.commonFunctions.validateFixedSizeNum(maxTicket, 6)) {
+      const context = {min: minTicket, max: maxTicket};
+      this.result = this.ticketsTask.findTicketsMethod(context);
+    } else {
+      this.result = 'Введите шестизначные целые числа';
+    }
   }
   drawIntegers(integersLength: string, minSquare: string) {
-    const intLength = Number(integersLength);
-    const minSqr = Number(minSquare);
-    this.result = this.integersTask.drawIntegers(intLength, minSqr);
+    if (this.commonFunctions.validateInputInt(integersLength) && this.commonFunctions.validatePositiveInputNum(minSquare)) {
+      this.result = this.integersTask.drawIntegers(Number(integersLength), Number(minSquare));
+    } else {
+      this.result = 'Длина ряда должна быть положительным целым числом. Минимальный квадрат - положительным числом';
+    }
   }
 
   // Fibonacci Task
   disableFiboRange(value) {
-    if (value !== '') {
-      this.isFiboRangeDisabled = true;
-    } else {
-      this.isFiboRangeDisabled = false;
-    }
+    this.isFiboRangeDisabled = value !== '';
   }
   disableFibolength(value) {
-    if (value !== '') {
-      this.isFiboLengthDisabled = true;
-    } else {
-      this.isFiboLengthDisabled = false;
-    }
+    this.isFiboLengthDisabled = value !== '';
   }
   showFibo(min: string, max: string, listLength: string) {
     const context = {
@@ -115,11 +113,11 @@ export class TaskSolutionComponent implements OnInit, OnChanges {
       max: undefined,
       listLength: undefined
     };
-    if (this.commonFunctions.validateInt(listLength)) {
+    if (this.commonFunctions.validateInputInt(listLength)) {
       context.listLength = Number(listLength);
       this.result = this.fiboTask.showFibo(context).toString();
 
-    } else if (this.commonFunctions.validateInt(min) && this.commonFunctions.validateInt(max)) {
+    } else if (this.commonFunctions.validateInputInt(min) && this.commonFunctions.validateInputInt(max)) {
       if (+min < +max) {
         context.min = Number(min);
         context.max = Number(max);
