@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Observable, Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,14 +26,6 @@ export class TaskListService {
       num: 7,
       name: 'Ряд Фибоначчи'
     }];
-  // current = new Subject();
 
   constructor() { }
-
-  // getCurrent(): Observable<any> {
-  //   return this.current.asObservable();
-  // }
-  // setCurrent(num: number): void {
-  //   this.current.next(this.elementaryTasks[num - 1]);
-  // }
 }

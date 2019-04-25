@@ -4,12 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FiboTaskService {
-  context: {min: number, max: number, listLength: number};
 
   constructor() { }
-  // validateRange(context: {min: number, max: number, listLength: number}) {
-  //   return context.min < context.max;
-  // }
   showFiboRange(context: {min: number, max: number, listLength: number}) {
     const fibo = [];
     let current = 0;

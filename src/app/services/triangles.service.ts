@@ -38,7 +38,6 @@ export class TrianglesService {
   }
   sortTriangles(triangleList) {
     let result = '';
-    // if (this.validateTriangleList(triangleList)) {
     triangleList.forEach((triangle) => {
       this.addSquare(triangle);
     });

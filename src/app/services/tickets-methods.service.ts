@@ -56,7 +56,6 @@ export class TicketsMethodsService {
     let current = +minNum;
     const max = +maxNum;
     const ticketLength = minNum.length;
-    // let result = 0;
     while (current <= max) {
       let ticket = current.toString();
       ticket = this.fillFullTicket(ticket, ticketLength);

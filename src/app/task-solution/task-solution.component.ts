@@ -1,12 +1,11 @@
 import {
   Component,
   OnInit,
-  Input, Output, EventEmitter, OnChanges, SimpleChanges
+  Input, OnChanges, SimpleChanges
 } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
 import { ChessTaskService } from '../services/chess-task.service';
 import { EnvelopesTaskService } from '../services/envelopes-task.service';
-import {Subscription} from 'rxjs';
 import {TrianglesService} from '../services/triangles.service';
 import {PalindromService} from '../services/palindrom.service';
 import {TicketsMethodsService} from '../services/tickets-methods.service';
@@ -23,7 +22,6 @@ export class TaskSolutionComponent implements OnInit, OnChanges {
   result: string;
 
   @Input() task: {num: number, name: string};
-  // subs = new Subscription();
 
   // Triangles Task
   triangles = [];
@@ -40,18 +38,10 @@ export class TaskSolutionComponent implements OnInit, OnChanges {
               private ticketsTask: TicketsMethodsService,
               private integersTask: IntegersTaskService,
               private fiboTask: FiboTaskService) {
-    // this.tasks = this.taskList.elementaryTasks;
     this.triangles = this.trianglesTask.triangles;
   }
 
-  ngOnInit() {
-    // this.current = this.task;
-    // const sub = this.taskList.getCurrent()
-    //  .subscribe((data: any) => {
-    //  this.current = data;
-    // });
-    // this.subs.add(sub);
-  }
+  ngOnInit() {  }
   ngOnChanges(changes: SimpleChanges): void {
     this.result = null;
   }

@@ -6,9 +6,6 @@ import { Injectable } from '@angular/core';
 export class PalindromService {
 
   constructor() { }
-  validate(field: string) {
-    return (!isNaN(+field) && +field >= 10 && field.length > 1);
-  }
   findPalindrom(field: string, min: number, max: number) {
     let palindrom = '';
     while (min >= 0 && max < field.length) {
