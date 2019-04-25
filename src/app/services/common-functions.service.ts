@@ -6,8 +6,11 @@ import { Injectable } from '@angular/core';
 export class CommonFunctionsService {
 
   constructor() { }
+  isEmpty(field: string) {
+    return field.trim() === '';
+  }
   validateInputInt(num: string) {
-    return !isNaN(+num) && +num % 1 === 0 && +num >= 0 && num !== '';
+    return !isNaN(+num) && Number.isInteger(+num) && +num >= 0 && num !== '';
   }
   validatePositiveInputNum(num: string) {
     return !isNaN(+num) && +num >= 0 && num !== '';
@@ -16,7 +19,16 @@ export class CommonFunctionsService {
     const regex = new RegExp(`^\\d{${size}}$`);
     return regex.test(num);
   }
-  isInt(num) {
-    return (num % 1 === 0);
+  validateFigureName(name: string, size: number) {
+    const regEx = new RegExp(`^[a-zA-Z]{${size}}$`);
+    return regEx.test(name);
+  }
+  validateTriangle(triangle) {
+    return (!isNaN(triangle.side1) && !isNaN(triangle.side2) && !isNaN(triangle.side3));
+  }
+  isTriangleReal(triangle) {
+    return (!(triangle.side1 + triangle.side2 <= triangle.side3)
+      && !(triangle.side1 + triangle.side3 <= triangle.side2)
+      && !(triangle.side3 + triangle.side2 <= triangle.side1));
   }
 }

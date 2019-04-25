@@ -14,36 +14,12 @@ export class TrianglesService {
   getTriangles() {
     return this.triangles;
   }
-  updateList(idx, param, sideNum) {
+  updateList(idx: number, param: string, sideNum: number) {
     if (sideNum) {
       this.triangles[idx]['side' + sideNum] = +param;
     } else {
       this.triangles[idx].name = param;
     }
-  }
-  validateTriangleName(triangle) {
-    const regEx = /^[a-z]{3}$/i;
-    return regEx.test(triangle.name);
-  }
-  validateTriangle(triangle) {
-    return (!isNaN(triangle.side1) && !isNaN(triangle.side2) && !isNaN(triangle.side3));
-  }
-  isTriangleReal(triangle) {
-    return (!(triangle.side1 + triangle.side2 <= triangle.side3)
-      && !(triangle.side1 + triangle.side3 <= triangle.side2)
-      && !(triangle.side3 + triangle.side2 <= triangle.side1));
-  }
-  validateTriangleList(triangleList) {
-    for (const item of triangleList) {
-      if (!this.validateTriangle(item)) {
-        return false;
-      } else if (!this.isTriangleReal(item)) {
-        return false;
-      } else if (!this.validateTriangleName(item)) {
-        return false;
-      }
-    }
-    return true;
   }
   addSquare(triangle) {
     const p = (triangle.side1 + triangle.side2 + triangle.side3) / 2;
@@ -62,17 +38,14 @@ export class TrianglesService {
   }
   sortTriangles(triangleList) {
     let result = '';
-    if (this.validateTriangleList(triangleList)) {
-      triangleList.forEach((triangle) => {
-        this.addSquare(triangle);
-      });
-      const sortedTriangles = this.copyTriangles(triangleList);
-      sortedTriangles.sort(this.compareSquare);
-      for (const triangle of sortedTriangles) {
-        result = result + triangle.name + ' ';
-      }
-    } else {
-      result = 'Запоните все поля. Стороны должны быть числами и формировать реальный треугольник. Имя треугольника - 3 буквы';
+    // if (this.validateTriangleList(triangleList)) {
+    triangleList.forEach((triangle) => {
+      this.addSquare(triangle);
+    });
+    const sortedTriangles = this.copyTriangles(triangleList);
+    sortedTriangles.sort(this.compareSquare);
+    for (const triangle of sortedTriangles) {
+      result = result + triangle.name + ' ';
     }
     return result;
   }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { TrianglesService } from '../services/triangles.service';
 
 @Component({
@@ -8,12 +8,15 @@ import { TrianglesService } from '../services/triangles.service';
 })
 export class TriangleComponent implements OnInit {
   @Input() index: number;
-
+  name: string;
+  side1: string;
+  side2: string;
+  side3: string;
   constructor(private trianglesTask: TrianglesService) { }
 
   ngOnInit() {
   }
-  updateTriangle(index, side, sideNum) {
+  updateTriangle(index: number, side: string, sideNum: number) {
     this.trianglesTask.updateList(index, side, sideNum);
   }
 }

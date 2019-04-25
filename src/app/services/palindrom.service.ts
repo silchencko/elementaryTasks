@@ -41,16 +41,12 @@ export class PalindromService {
   }
   checkPalindrom(field: string) {
     let result = '';
-    if (this.validate(field)) {
-      const palindromList = this.findAllPalindroms(field);
-      if (palindromList.length > 0) {
-        palindromList.sort((a, b) => b.length - a.length);
-        result = palindromList[0];
-      } else {
-        result = '0';
-      }
+    const palindromList = this.findAllPalindroms(field);
+    if (palindromList.length > 0) {
+      palindromList.sort((a, b) => b.length - a.length);
+      result = palindromList[0];
     } else {
-      result = 'Заполните поле числами, не менее 2-х символов';
+      result = '0';
     }
     return result;
   }

@@ -21,6 +21,7 @@ import {FiboTaskService} from '../services/fibo-task.service';
 })
 export class TaskSolutionComponent implements OnInit, OnChanges {
   result: string;
+
   @Input() task: {num: number, name: string};
   // subs = new Subscription();
 
@@ -54,21 +55,37 @@ export class TaskSolutionComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     this.result = null;
   }
+
+  // 1. Chess board Task
   drawChess(l: string, w: string, symb: string) {
-    const len = Number(l);
-    const wid = Number(w);
-    this.result = this.chessTask.drawBoard(len, wid, symb);
+    if (!this.commonFunctions.validateInputInt(l) || !this.commonFunctions.validateInputInt(w)) {
+      this.result = 'Длина и ширина должны быть целыми положительными числами';
+    } else if (this.commonFunctions.isEmpty(symb)) {
+      this.result = 'Заполните символ';
+    } else {
+
+      this.result = this.chessTask.drawBoard(Number(l), Number(w), symb);
+    }
   }
+
+  // 2. Envelopes Task
   checkEnvelopes(length1: string, width1: string, length2: string, width2: string) {
-    const env1 = {
-      len: Number(length1),
-      wid: Number(width1)};
-    const env2 = {
-      len: Number(length2),
-      wid: Number(width2)
-    };
-    this.result = this.envelopsTask.checkEnvelopes(env1, env2);
+    const args = [length1, width1, length2, width2];
+    if (args.every(side => this.commonFunctions.validatePositiveInputNum(side) && +side > 0)) {
+      const env1 = {
+        len: Number(length1),
+        wid: Number(width1)};
+      const env2 = {
+        len: Number(length2),
+        wid: Number(width2)
+      };
+      this.result = this.envelopsTask.checkEnvelopes(env1, env2);
+    } else {
+      this.result = 'Все стороны должны быть положительными числами';
+    }
   }
+
+  // 3. Triangles Task
   addTriangle() {
     this.trianglesTask.addTriangle({
       name: null,
@@ -78,12 +95,30 @@ export class TaskSolutionComponent implements OnInit, OnChanges {
     });
   }
   sortTriangles() {
+    const nameSize = 3;
     const triangleList = this.trianglesTask.getTriangles();
-    this.result = this.trianglesTask.sortTriangles(triangleList);
+    if (!triangleList.every(item => this.commonFunctions.validateFigureName(item.name, nameSize))) {
+      this.result = 'Имя треугольника - 3 буквы';
+    } else if (!triangleList.every(item => this.commonFunctions.validateTriangle(item))) {
+      this.result = 'Стороны триугольника должны быть положительными числами';
+    } else if (!triangleList.every(item => this.commonFunctions.isTriangleReal(item))) {
+      this.result = 'Нереальные стороны триугольника';
+    } else {
+      this.result = this.trianglesTask.sortTriangles(triangleList);
+    }
   }
+
+  // 4. Palindrom Task
   checkPalindrom(palindromField: string) {
-    this.result = this.palindromTask.checkPalindrom(palindromField.trim());
+    const field = palindromField.trim();
+    if (this.commonFunctions.validateInputInt(field) && +field >= 10) {
+      this.result = this.palindromTask.checkPalindrom(field.trim());
+    } else {
+      this.result = 'Ведице целое положительное число не меньше 10';
+    }
   }
+
+  // 5. Happy tickets Task
   findTicketsMethod(minTicket: string, maxTicket: string) {
     if (this.commonFunctions.validateFixedSizeNum(minTicket, 6) && this.commonFunctions.validateFixedSizeNum(maxTicket, 6)) {
       const context = {min: minTicket, max: maxTicket};
@@ -92,6 +127,8 @@ export class TaskSolutionComponent implements OnInit, OnChanges {
       this.result = 'Введите шестизначные целые числа';
     }
   }
+
+  // 6. Integers Task
   drawIntegers(integersLength: string, minSquare: string) {
     if (this.commonFunctions.validateInputInt(integersLength) && this.commonFunctions.validatePositiveInputNum(minSquare)) {
       this.result = this.integersTask.drawIntegers(Number(integersLength), Number(minSquare));
@@ -100,7 +137,7 @@ export class TaskSolutionComponent implements OnInit, OnChanges {
     }
   }
 
-  // Fibonacci Task
+  // 7. Fibonacci Task
   disableFiboRange(value) {
     this.isFiboRangeDisabled = value !== '';
   }

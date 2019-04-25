@@ -11,12 +11,7 @@ export class TicketsMethodsService {
   };
 
   constructor() { }
-  validate(context: {min: string, max: string}) {
-    const regex = /^\d{6}$/;
-    return (regex.test(context.min)
-      && regex.test(context.max)
-      && context.min < context.max);
-  }
+
   countElementsSum(str: string) {
     let result = 0;
     for (const item of str) {
